@@ -1,29 +1,34 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-const App = () => (
-    <Counter></Counter>
-  )
+import { increment, decrement } from '../actions';
 
-class Counter extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { count: 0}
-  }
-  handlePluss = () => {
-    this.setState( { count: this.state.count + 1 } )
-  }
-
-  handleMinus = () => {
-    this.setState({ count: this.state.count - 1 });
-  }
-
+class App extends Component {
   render() {
+    // stateやactionを格納するためのprops
+    const props = this.props
+
     return (
     <div>
-    { this.state.count }
-    <button onClick={this.handlePluss}>+1</button>
-    <button onClick={this.handleMinus}>-1</button>
+    {/* reducerのcount.js内にあるvalue（initialState）を表示する */}
+    { props.value }
+    <button onClick={props.increment}>+1</button>
+    <button onClick={props.decrement}>-1</button>
     </div>)
   }
 }
-export default App;
+// mapStateToPropsはStateの情報からコンポーネントで必要な情報を取り出して、
+// コンポーネント内のpropsとしてマッピングする機能を持つ
+// 引数にはstateを書いて、どういったオブジェクトをpropsとして対応させるのかを定義させる
+const mapStateToProps = state => ({ value: state.count.value })
+
+// mapDispatchToPropsはあるアクションが発生した時にReducerにTypeに応じた状態遷移を実行させるための関数
+// incrementのためのボタンとdecrementのためのボタンに必要なアクションをdispatch関数の引数に渡す
+// const mapDispatchToProps = dispatch => ({ 
+//   increment: () => dispatch(increment()),
+//   decrement: () => dispatch(decrement())
+// })
+
+const mapDispatchToProps = ({ increment, decrement })
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
