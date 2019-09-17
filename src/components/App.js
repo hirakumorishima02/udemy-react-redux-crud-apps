@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { increment, decrement } from '../actions';
+import { increment, decrement, hyakubai } from '../actions';
 
 class App extends Component {
   render() {
@@ -14,6 +14,7 @@ class App extends Component {
     { props.value }
     <button onClick={props.increment}>+1</button>
     <button onClick={props.decrement}>-1</button>
+    <button onClick={props.hyakubai}>100倍!</button>
     </div>)
   }
 }
@@ -29,6 +30,6 @@ const mapStateToProps = state => ({ value: state.count.value })
 //   decrement: () => dispatch(decrement())
 // })
 
-const mapDispatchToProps = ({ increment, decrement })
+const mapDispatchToProps = ({ increment, decrement, hyakubai })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

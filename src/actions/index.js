@@ -1,6 +1,7 @@
 // 複数箇所でINCREMENTなどは使用されるため変数化しておく
 export const INCREMENT = 'INCREMENT'
 export const DECREMENT = 'DECREMENT'
+export const HYAKUBAI = 'HYAKUBAI'
 
 // 下記のINCREMENTとDECREMENTでは書き方が違うが、
 // 上はリファクタリングが行われているだけで意味は同じ
@@ -14,3 +15,7 @@ export const decrement = () => {
         type: DECREMENT
     }
 }
+
+export const hyakubai = () => ({
+    type: HYAKUBAI
+})
